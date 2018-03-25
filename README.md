@@ -1,5 +1,5 @@
 
-![alt text](https://www.linuxadictos.com/wp-content/uploads/tux-kernel-linux.jpg)
+![alt text](https://data.computerworld.cz/img/article_title/title_l/5c/d8b8f4822ef44f2e4270be38eb96fe.jpg)
 
 ## Index 
 
