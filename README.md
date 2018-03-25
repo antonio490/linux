@@ -1,5 +1,5 @@
 
-![alt text](https://data.computerworld.cz/img/article_title/title_l/5c/d8b8f4822ef44f2e4270be38eb96fe.jpg)
+![alt text](https://static.wixstatic.com/media/bec156_2fa1ee307c1644fc9dd0b2547a46a249~mv2.gif)
 
 ## Index 
 
