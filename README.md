@@ -1,9 +1,9 @@
-# chroot_sftpuser.sh creates an internal sftp user with rsa login keys and a chroot directory. 
+## chroot_sftpuser.sh creates an internal sftp user with rsa login keys and a chroot directory. 
 
-# Logs
-# /var/log/auth.log
+## Logs
+### /var/log/auth.log
 
-# Helpful links
+## Helpful links
 
 https://www.digitalocean.com/community/tutorials/how-to-use-sftp-to-securely-transfer-files-with-a-remote-server
 
