@@ -1,3 +1,6 @@
+
+![alt text](https://www.linuxadictos.com/wp-content/uploads/tux-kernel-linux.jpg)
+
 ## Index 
 
 - chroot_sftpuser.sh 
