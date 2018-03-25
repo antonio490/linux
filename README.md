@@ -1,4 +1,5 @@
-## chroot_sftpuser.sh creates an internal sftp user with rsa login keys and a chroot directory. 
+- chroot_sftpuser.sh 
+ creates an internal sftp user with rsa login keys and a chroot directory. 
 
 ### Authorization logs
 
