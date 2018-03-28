@@ -46,6 +46,7 @@ $ chmod 0600 ~/.ssh/authorized_keys
 
 
 > Execution
+
 In order to run a MapReduce job locally follow next commands:
 
 Format the filesystem:
@@ -55,6 +56,16 @@ Format the filesystem:
 Start Namenode and Datanode daemons:
 
 <code> sbin/start-dfs.sh </code>
+
+Web interface for the Namenode is available here:
+
+<code> http://localhost:50070 </code>
+
+Make some tryouts copying files into the distributed filesystem, running some of the examples and checking the outpus files from the distributed filesystem to the local filesystem.
+
+When you are done, stop the daemons:
+
+<code> sbin/stop-dfs.sh </code>
 
 ### Logs
 
