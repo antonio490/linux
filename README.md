@@ -4,9 +4,11 @@
 ## Index 
 
 - chroot_sftpuser.md
+
     Document which helps you build an sftp user enabling rsa public keys login and a chroot directory.
 
 - hadoop_config.md
+
     Initial Hadoop configuration with Linux operative system.
 
 
