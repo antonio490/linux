@@ -40,19 +40,20 @@
 
 <code> ssh localhost </code>
 
-<code>
-    $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-    $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-    $ chmod 0600 ~/.ssh/authorized_keys
-</code>
+$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+$ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+$ chmod 0600 ~/.ssh/authorized_keys
+
 
 > Execution
 In order to run a MapReduce job locally follow next commands:
 
 Format the filesystem:
+
 <code> bin/hdfs namenode -format </code>
 
 Start Namenode and Datanode daemons:
+
 <code> sbin/start-dfs.sh </code>
 
 ### Logs
@@ -62,3 +63,5 @@ Start Namenode and Datanode daemons:
 ### Helpful links
 
 1. (https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html)
+
+2. (https://www.digitalocean.com/community/tutorials/how-to-install-hadoop-in-stand-alone-mode-on-ubuntu-16-04)
