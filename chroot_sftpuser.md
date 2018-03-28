@@ -30,15 +30,15 @@ ssh-keygen -t rsa
 
 > We need to comment this line:
 
-Subsystem sftp /usr/lib/openssh/sftp-server
+    Subsystem sftp /usr/lib/openssh/sftp-server
 
 > And add this at the end:
 
-Subsystem sftp internal-sftp
-Match Group [group name]
-    ChrootDirectory [directory path]
-    ForceCommand internal-sftp
-    AllowTcpForwarding no
+    Subsystem sftp internal-sftp
+    Match Group [group name]
+        ChrootDirectory [directory path]
+        ForceCommand internal-sftp
+        AllowTcpForwarding no
 
 > Apply root permission to the directory you want to jailed
  
