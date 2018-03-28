@@ -16,25 +16,25 @@
 
 <code> open /etc/hadoop/core-site.xml </code>
 
-<code> 
+
     <configuration>
         <property>
             <name>fs.defaultFS</name>
             <value>hdfs://localhost:9000</value>
         </property>
     </configuration>
-</code>
+
 
 <code> open /etc/hadoop/hdfs-site.xml </code>
 
-<code>
+
     <configuration>
         <property>
             <name>dfs.replication</name>
             <value>1</value>
         </property>
     </configuration>
-</code>
+
 
 > Set up passphrase ssh
 
