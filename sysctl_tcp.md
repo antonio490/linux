@@ -31,9 +31,9 @@ Brandwidth delay product will go on increasing if the latency RTT is higher.
 Open sysclt.conf and modify this values:
 
     tcp_window.scaling = 1
-    net.core.rmem_max = 16777216 (1Gbi)
-    net.core.wmem_max = 16777216 (1Gbi)
-    net.ipv4.tcp_rmem = 4096    87580   16777216
-    net.ipv4.tcp_wmem = 4096    8750    16777216
+    net.core.rmem_max = 1677216 (1Gbi)
+    net.core.wmem_max = 1677216 (1Gbi)
+    net.ipv4.tcp_rmem = 4096    87580   1677216
+    net.ipv4.tcp_wmem = 4096    8750    1677216
 
 <code> sysctl -p /etc/sysctl.conf </code>
