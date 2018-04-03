@@ -22,9 +22,7 @@ List of all parameters:
 
 ### Bandwidth delay product BDP
 
-\begin{align}
-BDP = BW /times RTT
-\end{align}
+> BDP = BW x RTT
 
 If the receiver window is less than the BDP then the connection is wasting resources.
 
