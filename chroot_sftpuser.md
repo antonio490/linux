@@ -3,15 +3,15 @@
 
 <br>
 
-> Install open-ssh
+ Install open-ssh
 
 <code> sudo apt-get install open-ssh </code>
 
-> Login to server with a ssh user
+ Login to server with a ssh user
 
 <code> ssh [root-user]@[ip-ssh-server] </code>
 
-> Create user group
+ Create user group
 
 <code> groupadd [group name] </code>
 
