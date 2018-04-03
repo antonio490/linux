@@ -30,7 +30,7 @@ If the receiver window is less than the BDP then the connection is wasting resou
 
 Brandwidth delay product will go on increasing if the latency RTT is higher.
 
-Open systeclt.conf and modify this values:
+Open sysclt.conf and modify this values:
 
     tcp_window.scaling = 1
     net.core.rmem_max = 16777216 (1Gbi)
