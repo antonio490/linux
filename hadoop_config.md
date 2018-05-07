@@ -1,5 +1,5 @@
 
-## Setting up Hadoop single cluster
+### Setting up Hadoop single cluster
 
 > Install software
 
