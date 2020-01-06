@@ -27,3 +27,11 @@ Now we can proceed to erase all information (partition tables and data)
 
 After we have succesfully rewrote everything with zeros, we can start out by creating a new partition table. We have multiple options to do this task fdisk, parted, gparted...
 
+    $ sudo parted /dev/sdb
+
+    $ (parted) mklabel msdos
+
+    $ Partition type? primary/extended? primary
+
+    $ mkfs -t vfat /dev/sdb1
+
