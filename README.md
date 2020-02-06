@@ -16,6 +16,10 @@
 
     Initial Hadoop configuration with Linux operative system.
 
+- format_partition.md
+  
+    format disks using command line interface.
+
 - SSH_tunnel.md
 
     Commands to build a tunnel (port) between your local computer and a remote SSH server.
