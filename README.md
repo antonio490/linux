@@ -1,5 +1,5 @@
 
-![alt text](https://static.wixstatic.com/media/bec156_2fa1ee307c1644fc9dd0b2547a46a249~mv2.gif)
+![alt text](https://w0.pngwave.com/png/767/339/linux-png-clip-art.png)
 
 ## Index 
 
@@ -10,6 +10,14 @@
 - hadoop_config.md
 
     Initial Hadoop configuration with Linux operative system.
+
+- SSH_tunnel.md
+
+    Commands to build a tunnel (port) between your local computer and a remote SSH server.
+
+- sysctl_tcp.md
+    
+    Linux Kernel parameters configuration.
 
 
 
