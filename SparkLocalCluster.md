@@ -9,7 +9,9 @@
 
 
 
-Steps we have to follow in order to run our own pre built local cluster.
+Directions about how we can run our own local cluster. Next image shows Spark architecture, which is basically made by a Driver, a Cluster Manager and Worker nodes.
+
+![alt text](https://1.bp.blogspot.com/-c5-B-T9ABK4/XAK0709gIWI/AAAAAAAABB8/OvjFJC15e74DoWxJQLliUrskUSbH18aPACEwYBhgL/s1600/pic4.PNG)
 
 <h4>Prerequisites</h4>
 
@@ -73,11 +75,11 @@ Let's start opening a pyspark terminaland executing a dummy example:
 
 ### E. Tune server parameters
 
->spark-defaults.conf
+<b>spark-defaults.conf</b>
 
     spark.cores.max=8
 
->spark-env.sh
+<b>spark-env.sh</b>
 
     PYSPARK_PYTHON=python3
 
