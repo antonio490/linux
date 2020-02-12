@@ -23,3 +23,7 @@ If you want to do the same as above but using a graphical interface such as Putt
     $ ssh -R 8888:localhost:1234 user@ip_dir
 
 Someone could then connect to the SSH server at port 888 and that connection would be tunneled to the server application running at port 1234 on the local PC you established the connection from.
+
+Putty
+
+![alt text](https://www.howtogeek.com/wp-content/uploads/2017/02/ximg_589a52fd11a14.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.cZGz_5mKkp.png)

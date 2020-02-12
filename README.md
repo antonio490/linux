@@ -28,5 +28,8 @@
     
     Linux Kernel parameters configuration.
 
+- sparkLocalCluster.md
+
+    Directions and examples about how we can run our own Hadoop-Spark cluster.
 
 

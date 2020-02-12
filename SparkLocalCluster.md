@@ -110,7 +110,8 @@ Read files as dataframes using:
 ### G. Run Spark examples
 
     # Running an example
-    ./bin/run-example --master spark://10.250.13.32:7077 --name <name> --conf spark.driver.host=<IP> SparkPi
+    ./bin/run-example --master spark://10.250.13.32:7077 --name <name> 
+    --conf spark.driver.host=<IP> SparkPi
 
     # Run an example using spark-submit
     ./bin/spark-submit --master spark://10.250.13.32:7077 --name <name>
