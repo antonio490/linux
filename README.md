@@ -36,4 +36,8 @@
     
     What is Teletype and how we can use it.
 
+- xrandr.md
+  
+    How to change monitor resolution.
+
 

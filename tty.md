@@ -32,8 +32,21 @@ To get back to your graphical desktop environment, press <kbd>Ctrl</kbd>+<kbd>Al
 
 Pressing <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1</kbd> will return you to the login prompt of your graphical desktop session.
 
+
+### CLI
+
+Instead of using the keyboard shortcut we can also change virtual terminals on cli typing the next commands:
+
+        $ chvt <terminal #>
+
+        $ chvt 2 // Desktop tty
+
+        $ chvt 3 // tty 3
+
 ### When can tty be useful?
 
 - If we have to move a lot of data from directories instead of doing it on the Desktop tty it might be a good idea to do it on tty 3 for example so the action is executed faster.
 
 - If computer freezes we should open a tty and try to stop programms running or reboot the computer on a safely way.
+
+
