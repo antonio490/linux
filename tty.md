@@ -31,3 +31,9 @@ You can access a full-screen TTY session by holding down the <kbd>Ctrl</kbd>+<kb
 To get back to your graphical desktop environment, press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F2</kbd>
 
 Pressing <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1</kbd> will return you to the login prompt of your graphical desktop session.
+
+### When can tty be useful?
+
+- If we have to move a lot of data from directories instead of doing it on the Desktop tty it might be a good idea to do it on tty 3 for example so the action is executed faster.
+
+- If computer freezes we should open a tty and try to stop programms running or reboot the computer on a safely way.
