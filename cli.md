@@ -10,11 +10,11 @@
 
 List all packages installed in our linux debian system:
 
-   $ dpkg --get-selections 
+    $ dpkg --get-selections 
 
 Export all packages installed into a txt file:
 
-   $ dpkg --get-selections > package.txt
+    $ dpkg --get-selections > package.txt
 
 Install packages from txt file:
 
