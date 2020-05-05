@@ -40,4 +40,8 @@
   
     How to change monitor resolution.
 
+- cli.md
+
+    helpful things we can do with our command line interface.
+
 
