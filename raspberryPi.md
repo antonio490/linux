@@ -51,7 +51,6 @@ Otherwise we can configure network interfaces like this after boot.
 
 </code>
 
-Miscellaneous configurations
 
 <code>
 
@@ -62,3 +61,45 @@ Miscellaneous configurations
 1. Enable SSH server startup
 2. Enbale I2C and Camera interfaces
 3. Set localisation options
+
+
+## Services
+
+### Node-Red
+
+Installation script:
+
+<code>
+
+     $ bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+
+<code>
+
+To launch node red service locally execute this command:
+
+<code>
+
+     $ node-red-pi --max-old-space-size=256
+
+</code>
+
+If you want Node-RED to run when the Pi is turned on, or re-booted, you can enable the service to autostart by running the command:
+
+<code>
+     
+     $ sudo systemctl enable nodered.service
+
+</code>
+
+To disable the service, run the command:
+
+<code>
+
+     $ sudo systemctl disable nodered.service
+
+</code>
+
+When browsing from another machine you should use the hostname or IP-address of the Pi: <kbd> http://<hostname>:1880 </kbd> You can find the IP address by running hostname -I on the Pi.
+
+
+### Apache Tomcat
