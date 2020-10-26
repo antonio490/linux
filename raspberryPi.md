@@ -101,3 +101,27 @@ To disable the service, run the command:
 
 When browsing from another machine you should use the hostname or IP-address of the Pi: <kbd> http://<hostname>:1880 </kbd> You can find the IP address by running hostname -I on the Pi.
 
+### MQTT
+
+<code>
+
+     $ sudo apt-get update
+     $ sudo apt-get install mosquitto
+     $ sudo apt-get install mosquitto-clients
+
+</code>
+
+> Demo
+
+<code>
+     
+     pi@raspberrypi:~ $ mosquitto_sub -d -h localhost -t "TEST"
+</code>
+
+<code>
+
+     antonio ~ $ mosquitto_pub -h 172.22.17.100 -t "TEST" -m "Mi primer mensaje usando MQTT"
+</code>
+
+Client mosqsub|3788-raspberryp received PUBLISH (d0, q0, r0, m0, 'GPIO', ... (29 bytes))
+Mi primer mensaje usando MQTT
