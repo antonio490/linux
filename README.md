@@ -1,12 +1,12 @@
 
          _     ___ _   _ _   ___  __
         | |   |_ _| \ | | | | \ \/ /
-        | |    | ||  \| | | | |\  / 
-        | |___ | || |\  | |_| |/  \ 
+        | |    | ||  \| | | | |\  /
+        | |___ | || |\  | |_| |/  \
         |_____|___|_| \_|\___//_/\_\
 
 
-### Index 
+### Index
 
 - chroot_sftpuser.md
 
@@ -17,7 +17,7 @@
     Initial Hadoop configuration with Linux operative system.
 
 - format_partition.md
-  
+
     format disks using command line interface.
 
 - SSH_tunnel.md
@@ -25,23 +25,29 @@
     Commands to build a tunnel (port) between your local computer and a remote SSH server.
 
 - sysctl_tcp.md
-    
+
     Linux Kernel parameters configuration.
 
 - sparkLocalCluster.md
 
-    Directions and examples about how we can run our own Hadoop-Spark cluster.
+    Guide and examples about how we can run our own Hadoop-Spark cluster.
 
 - tty.md
-    
+
     What is Teletype and how we can use it.
 
 - xrandr.md
-  
+
     How to change monitor resolution.
 
 - cli.md
 
     helpful things we can do with our command line interface.
 
+- realtekWifi_Troubleshoot.md
 
+    Fix for realtek drivers on ubuntu 20.04
+
+- gpg.md
+
+    Guide for OpenPGP command line tool.
