@@ -25,4 +25,4 @@
 
     $ gpg --edit-key username@email
 
-The application will then ask the level of trust we want set on our key.
+The application will then ask the level of trust we want to set on our key.
