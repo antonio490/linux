@@ -1,6 +1,9 @@
 
 # Realtek wifi adapter
 
+
+### First option
+
 How to fix realtek linux driver.
 
 
@@ -30,3 +33,12 @@ to change two values on the following configuration files:
 
 
 Lastly reboot the system.
+
+### Second option
+
+Blacklisting the r8169 driver
+
+    $ sudo sh -c 'echo blacklist r8169 >> /etc/modprobe.d/blacklist.conf'
+
+
+> https://tuxbyte.com/how-to-get-your-realtek-rtl8111rtl8168-working-updated-guide/
