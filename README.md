@@ -51,3 +51,7 @@
 - gpg.md
 
     Guide for OpenPGP command line tool.
+
+- netRules.sh
+
+    Script to identify net interfaces with mac addresses in a persistent way.
