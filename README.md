@@ -55,3 +55,7 @@
 - netRules.sh
 
     Script to identify net interfaces with mac addresses in a persistent way.
+
+- aleternatives.md
+
+    How to change from default to alternative Python version on Debian Linux 
