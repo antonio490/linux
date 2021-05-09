@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=antonio-AppImage
+Exec=antonio
+ARCH=x86_64
+Icon=terminal-256x256
+Categories=Utility
