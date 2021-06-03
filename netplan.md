@@ -8,9 +8,11 @@
 Utility to easily configure network interfaces using YAML description. Netplan reads network configuration from /etc/netplan/*.yaml which are written by administrators, installers and others OS deployments. During early boot Netplan generates backend specific configuration files in /run to hand off control of devices to a particular networking daemon.
 
 <br>
-<img align="center" width="250" height="350" src="IMGS/img1.png">
+<p align="center">
+  <img width="250" height="350" src="IMGS/img1.png" alt=""/>
+</p>
 <br>
-<br>
+
 
 networkd is part of Systemd. In other word systemd-networkd used to manage network connections using Systemd. On the other hand NetworkManager is a GUI tool for configuring networking options. You can tell Netplan to use NetworkManager and it is useful for Linux desktop or laptop users.
 
