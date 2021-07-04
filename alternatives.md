@@ -1,4 +1,4 @@
-# Chnage from default to alternative version in python
+# Change from default to alternative version in python
 
 To change python version system-wide we can use update-alternatives command. Logged in as a root user, first list all available python alternatives: 
 
