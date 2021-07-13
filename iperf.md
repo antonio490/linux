@@ -61,6 +61,8 @@ The default protocol for Iperf to use is TCP. You can change this to UDP with th
 
 The result will have an extra metric for the packet loss which should be as low as possible, otherwise the packets will have to be re-transmitted using more bandwidth.
 
+    $ iperf -u -c 172.22.14.221 -b <bandwidth>
+
 ### Run multiple threads
 
     $ iperf -c -P 4
