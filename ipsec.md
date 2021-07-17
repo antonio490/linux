@@ -69,3 +69,85 @@ After installation check if the service strongswan is running and enable:
     $ sudo systemctl status strongswan.service
     
     $ sudo systemctl is-enabled strongswan.service
+
+
+## Configure security gateways
+
+Now we need to configure the security gateways on /etc/ipsec.conf
+
+> SITE 1 
+
+
+    config setup
+            charondebug="all"
+            uniqueids=yes
+    conn devgateway-to-prodgateway
+            type=tunnel
+            auto=start
+            keyexchange=ikev2
+            authby=secret
+            left=10.20.20.1
+            leftsubnet=192.168.0.101/24
+            right=10.20.20.3
+            rightsubnet=10.0.2.15/24
+            ike=aes256-sha1-modp1024!
+            esp=aes256-sha1!
+            aggressive=no
+            keyingtries=%forever
+            ikelifetime=28800s
+            lifetime=3600s
+            dpddelay=30s
+            dpdtimeout=120s
+            dpdaction=restart
+
+
+> SITE 2
+
+    config setup
+            charondebug="all"
+            uniqueids=yes
+    conn prodgateway-to-devgateway
+            type=tunnel
+            auto=start
+            keyexchange=ikev2
+            authby=secret
+            left=10.20.20.5
+            leftsubnet=10.0.2.15/24
+            right=10.20.20.1
+            rightsubnet=192.168.0.101/24 
+            ike=aes256-sha1-modp1024!
+            esp=aes256-sha1!
+            aggressive=no
+            keyingtries=%forever
+            ikelifetime=28800s
+            lifetime=3600s
+            dpddelay=30s
+            dpdtimeout=120s
+            dpdaction=restart
+
+- left – defines the IP address of the left participant’s public-network interface (local).
+- leftsubnet – states the private subnet behind the left participant.
+- right – specifies the IP address of the right participant’s public-network interface (remote).
+- rightsubnet – states the private subnet behind the left participant.
+
+## Configure PSK for peer identification
+
+Letś generate a secure PSK:
+
+    $ head -c 24 /dev/urandom | base64
+
+Next, add the PSK in the /etc/ipsec.secrets file on both gateways.
+
+    ------- Site 1 Gateway ------- 
+
+    10.20.20.1 10.20.20.5 : PSK "qLGLTVQOfqvGLsWP75FEtLGtwN3Hu0ku6C5HItKo6ac="
+
+    ------- Site 2 Gateway -------
+
+    10.20.20.5  10.20.20.1 : PSK "qLGLTVQOfqvGLsWP75FEtLGtwN3Hu0ku6C5HItKo6ac="
+
+<br>
+
+    $ sudo ipsec restart
+
+    $ sudo ipsec status
