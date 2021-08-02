@@ -66,6 +66,7 @@ Add the following configuration into the /etc/strongswan.conf
 ### Configuration swanctl.conf
 
 
-<img height="250" width="600" src="https://github.com/antonio490/linux/blob/master/IMGS/strongswan.png">
+
+<img height="200" width="650" src="https://github.com/antonio490/linux/blob/master/IMGS/strongswan.png">
 
 
