@@ -61,3 +61,11 @@ Add the following configuration into the /etc/strongswan.conf
     }
 
     include strongswan.d/*.conf
+
+
+### Configuration swanctl.conf
+
+
+<img height="250" width="600" src="https://github.com/antonio490/linux/blob/master/IMGS/strongswan.png">
+
+
