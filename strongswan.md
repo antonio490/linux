@@ -39,3 +39,25 @@ Strongswan is usually managed with the swanctl command, while the IKE daemon cha
 - On startup: CHILD_SAs configured with start_action=start or (auto=start) will automatically be established when the daemon is started. The are not automatically restarted when they go down for some reason. You need to specify other configuration settings. (dpd_action/dpdaction and/or close_action/closeaction) to restart them automatically, but even then, the setup is not bullet-proof and will potentially leak packets.
 
 - Manually: A connection that uses no start_action (or auto=add in ipsec.conf) has to be established manually with swanctl --initiate or ipsec up. Depending on the configuration, it is also possible to use swanctl --install or ipsec route to install policies manually for such connections, like start_action=trap/auto=route would do it on startup.
+
+
+### How to start swanctl from startup
+
+Manual mode to start swanctl:
+
+    $ swanctl --load-all
+    $ swanctl -i -c <child name>
+
+Add the following configuration into the /etc/strongswan.conf
+
+    charon {
+        load_modular = yes
+        plugins {
+            include strongswan.d/charon/*.conf
+        }
+        start-scripts {
+            load-all = /usr/sbin/swanctl --load-all
+        } 
+    }
+
+    include strongswan.d/*.conf
