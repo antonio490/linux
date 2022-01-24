@@ -41,9 +41,25 @@ The linker creates the final executable, in binary and it plays two roles:
     gcc main.c -o app
 
 
+## pkg-config
+
+The main use of pkg-config is to provide the necessary details for compiling and linking a program to a library. This metadata is stored in pkg-config files. These files have to suffix .pc and reside in specific locations known to the pkg-config tool.
+
+    prefix=/usr/local
+    exec_prefix=${prefix}
+    includedir=${prefix}/include
+    libdir=${exec_prefix}/lib
+
+    Name: foo
+    Description: The foo library
+    Version: 1.0.0
+    Cflags: -I${includedir}/foo
+    Libs: -L${libdir} -lfoo
 
 ### Bibliography
 
 [Compiling C files with gcc](https://medium.com/@laura.derohan/compiling-c-files-with-gcc-step-by-step-8e78318052)
 
 [Static vs Dynamic](https://2142.medium.com/static-and-dynamic-static-or-dynamic-c810dc2443fa)
+
+[pkg-config](https://people.freedesktop.org/~dbn/pkg-config-guide.html)
