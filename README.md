@@ -59,3 +59,14 @@
 - aleternatives.md
 
     How to change from default to alternative Python version on Debian Linux 
+    
+ ## Issues 
+
+What worked for me (Lenovo thinkpad x1 Carbon, Ubuntu 18.04 LTS), is either switching the display manager back and forth between gdm3 and lightdm
+
+         sudo dpkg-reconfigure gdm3
+
+and/or reinstalling lightdm and reconfiguring it again instead of using gdm3
+
+         sudo apt-get install --reinstall lightdm ubuntu-desktop
+
