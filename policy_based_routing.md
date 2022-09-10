@@ -40,4 +40,17 @@ With this line in place, the rule should persist across reboots or across networ
 
 ### Populating the Routing Table
 
-Once we have the custom policy routing table created and a rule defined that directs the system to use it, we need to populate the table with the correct routes. The generic command to do this is the ′ip route add′ command, but with a specific ′table′ parameter added.
+Once we have the custom policy routing table created and a rule defined that directs the system to use it, we need to populate the table with the correct routes. The generic command to do this is the `ip route add` command, but with a specific `table` parameter added.
+
+Using our previous example, let's say we wanted to add a default route that was specific to traffic originating from 192.168.30.200
+To add a new default route specifically for that interface, you'd use this command:
+
+    ip route add default via 192.168.30.1 dev eth1 table custom
+
+As with the policy routing tables, routes added this way are not persistent, so you'll want to make them persistent by adding a line like this to your /etc/network/interfaces configuration file:
+
+    post-up ip route add default via 192.168.30.1 dev eth1 table custom
+
+This will ensure that the appropriate routes are added to the policy routing table when the corresponding network interface is brought up.
+
+
