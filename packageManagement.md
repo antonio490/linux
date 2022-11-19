@@ -107,13 +107,13 @@ APT is not a substitute for dpkg, we may think it as a front end, filling gaps s
 
 There are many utilities that interact with APT, the main ones being:
     
-    *apt-get*
+    <code> apt-get </code>
     used to download, install, upgrade or remove packages from the system.
 
-    *apt-cache*
+    <code> apt-cache </code>
     used to perform operations, like searches, in the package index.
 
-    *apt-file*
+    <code> apt-file </code>
     used for searching for files inside packages.
 
 *NOTE*
@@ -139,7 +139,7 @@ command, followed by the update parameter:
     Hit:10 http://us.archive.ubuntu.com/ubuntu disco-backports InRelease
     Reading package lists... Done
 
-- Instead of apt-get update, you can also use apt update.
+- Instead of <code> apt-get update </code>, you can also use <code> apt update </code>.
 
 ### Installing and Removing Packages
 
@@ -173,7 +173,7 @@ will always show what will be installed or removed before asking if you want to 
 
 Note that when a package is removed the corresponding configuration files are left on the system.
 To remove the package and any configuration files, use the purge parameter instead of remove or the
-remove parameter with the --purge option:
+remove parameter with the <code> --purge </code> option:
     
     # apt-get purge p7zip
     # apt-get remove --purge p7zip
@@ -185,16 +185,15 @@ remove parameter with the --purge option:
 It is possible to have “broken dependencies” on a system. This means that one or more of the
 installed packages depend on other packages that have not been installed, or are not present
 anymore. This may happen due to an APT error, or because of a manually installed package.
-To solve this, use the apt-get install -f command. This will try to “fix” the broken packages by
-installing the missing dependencies, ensuring that all packages are consistent again.
+To solve this, use the <code> apt-get install -f </code> command. This will try to “fix” the broken packages by installing the missing dependencies, ensuring that all packages are consistent again.
 
-- You can also use apt install -f.
+- You can also use <code> apt install -f </code>.
 
 ### Upgrading Packages
 
 APT can be used to automatically upgrade any installed packages to the latest versions available
 from the repositories. This is done with the apt-get upgrade command. Before running it, first
-update the package index with apt-get update:
+update the package index with <code> apt-get update </code>:
 
     # apt-get update
     Hit:1 http://us.archive.ubuntu.com/ubuntu disco InRelease
@@ -207,7 +206,7 @@ To upgrade a single package, just run apt-get upgrade followed by the package na
 apt-get will first check if a previous version of a package is installed. If so, the package will be
 upgraded to the newest version available in the repository. If not, a fresh copy will be installed.
 
-- You can also use apt upgrade and apt update.
+- You can also use <code> apt upgrade </code> and <code> apt update </code>.
 
 ### The Local Cache
 
@@ -215,15 +214,15 @@ When you install or update a package, the corresponding .deb file is downloaded 
 directory before the package is installed. By default, this directory is /var/cache/apt/archives.
 Partially downloaded files are copied to /var/cache/apt/archives/partial/.
 As you install and upgrade packages, the cache directory can get quite large. To reclaim space, you
-can empty the cache by using the apt-get clean command. This will remove the contents of the
-/var/cache/apt/archives and /var/cache/apt/archives/partial/ directories.
+can empty the cache by using the <code> apt-get clean </code> command. This will remove the contents of the /var/cache/apt/archives and /var/cache/apt/archives/partial/ directories.
 
-- You can also use apt clean.
+- You can also use <code> apt clean </code>.
 
 ### Searching for Packages
 
 The apt-cache utility can be used to perform operations on the package index, such as searching for
 a specific package or listing which packages contain a specific file.
+
 To conduct a search, use apt-cache search followed by a search pattern. The output will be a list of
 every package that contains the pattern, either in its package name, description or files provided.
 
@@ -235,8 +234,7 @@ every package that contains the pattern, either in its package name, description
     p7zip-full - 7z and 7za file archivers with high compression ratio
     p7zip-rar - non-free rar module for p7zip
 
-- You can also use apt search instead of apt-cache search and apt show instead of
-apt-cache show.
+- You can also use <code> apt search </code> instead of <code> apt-cache search </code> and <code> apt show </code> instead of <code> apt-cache show </code>.
 
 ### The Sources List
 
