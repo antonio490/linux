@@ -107,19 +107,18 @@ APT is not a substitute for dpkg, we may think it as a front end, filling gaps s
 
 There are many utilities that interact with APT, the main ones being:
     
-    <code> apt-get </code>
+    # apt-get
     used to download, install, upgrade or remove packages from the system.
 
-    <code> apt-cache </code>
+    # apt-cache
     used to perform operations, like searches, in the package index.
 
-    <code> apt-file </code>
+    # apt-file
     used for searching for files inside packages.
 
 *NOTE*
 
-apt and apt-get may require a network connection, because packages and package
-indexes may need to be downloaded from a remote server.
+<code> apt </code> and <code> apt-get </code> may require a network connection, because packages and package indexes may need to be downloaded from a remote server.
 
 ### Updating the Package Index
 Before installing or upgrading software with APT, it is recommended to update the package index
