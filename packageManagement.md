@@ -291,5 +291,18 @@ After installation, you will need to update the package cache used for apt-file:
     apt-cache show gimp
 
 
-
 # RPM and YUM Package Management
+
+Efforts to standardize a way to distribute these software “packages” grew, and the first package
+managers were born. These tools made it much easier to install, configure or remove software from a
+system.
+
+One of those was the RPM Package Manager and its corresponding tool (rpm), developed by Red Hat.
+Today, they are widely used not only on Red Hat Enterprise Linux (RHEL) itself, but also on its
+descendants, like Fedora, CentOS and Oracle Linux, other distributions like openSUSE and even
+other operating systems, like IBM’S AIX.
+
+Other package management tools popular on Red Hat compatible distros are yum (YellowDog Updater Modified), dnf (Dandified YUM) and zypper, which can streamline many of the aspects of
+the installation, maintenance and removal of packages, making package management much easier.
+In this lesson, we will learn how to use rpm, yum, dnf and zypper to obtain, install, manage and
+remove software on a Linux system.
