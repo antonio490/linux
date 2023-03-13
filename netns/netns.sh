@@ -33,11 +33,16 @@ ip -n ns2 addr add 10.0.0.2/24 dev veth1
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # test ping
+echo -e '\n\e[32m-------------- PING [ns1 -> ns2] ---------------\e[0m\n'
 ip netns exec ns1 ping 10.0.0.2 -c4
+
+echo -e '\n\e[32m-------------- PING [ns2 -> ns1] ---------------\e[0m\n'
 ip netns exec ns2 ping 10.0.0.1 -c4
 
 
 # remove net namespaces
+echo -e '\n\e[31m-------------- DELETE NAMESPACES ---------------\e[0m\n'
+
 ip netns delete ns1
 ip netns delete ns2
 
