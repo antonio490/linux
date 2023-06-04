@@ -62,40 +62,50 @@ This will ensure that the appropriate routes are added to the policy routing tab
 | <b> Schema VM1 as gateway </b> |
 
 
-Configuration VM1:
+<u> Configuration VM1: </u>
 
-eth0: Connection to WAN
-eth1: conection to internal net
 
-    echo "1" > /proc/sys/net/ipv4/ip_forward
+```js
+echo "1" > /proc/sys/net/ipv4/ip_forward
 
-    iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
-    iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
 
-    iptables-save
+iptables-save
+
+```
 
 ```js
 
-    ┌──(kali㉿kali)-[~]
-    └─$ ip a    
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-        inet 127.0.0.1/8 scope host lo
-        valid_lft forever preferred_lft forever
-        inet6 ::1/128 scope host 
-        valid_lft forever preferred_lft forever
-    2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-        link/ether 08:00:27:53:0c:ba brd ff:ff:ff:ff:ff:ff
-        inet 192.168.2.64/24 brd 192.168.2.255 scope global dynamic noprefixroute eth0
-        valid_lft 1810790sec preferred_lft 1810790sec
-        inet6 2003:ea:970d:f664:8e27:b0f:3fff:d2b0/64 scope global dynamic noprefixroute 
-        valid_lft 172791sec preferred_lft 86391sec
-        inet6 fe80::5686:70ad:8003:f84d/64 scope link noprefixroute 
-        valid_lft forever preferred_lft forever
-    3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-        link/ether 08:00:27:5f:36:b3 brd ff:ff:ff:ff:ff:ff
-        inet 172.17.80.1/24 scope global eth1
-        valid_lft forever preferred_lft forever
+┌──(kali㉿kali)-[~]
+└─$ ip a    
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+    valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+    valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:53:0c:ba brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.64/24 brd 192.168.2.255 scope global dynamic noprefixroute eth0
+    valid_lft 1810790sec preferred_lft 1810790sec
+    inet6 2003:ea:970d:f664:8e27:b0f:3fff:d2b0/64 scope global dynamic noprefixroute 
+    valid_lft 172791sec preferred_lft 86391sec
+    inet6 fe80::5686:70ad:8003:f84d/64 scope link noprefixroute 
+    valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:5f:36:b3 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.80.1/24 scope global eth1
+    valid_lft forever preferred_lft forever
+
+```
+
+```js
+┌──(root㉿kali)-[/home/kali]
+└─# ip ro sh             
+default via 192.168.2.1 dev eth0 proto dhcp src 192.168.2.64 metric 100 
+172.17.80.0/24 dev eth1 proto kernel scope link src 172.17.80.1 
+192.168.2.0/24 dev eth0 proto kernel scope link src 192.168.2.64 metric 100 
 
 ```
