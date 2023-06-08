@@ -11,7 +11,9 @@ With sysctl is possible to configure kernel parameters:
 
 List of all parameters:
 
-<code> sysctl -a </code>
+```js
+sysctl -a
+```
 
 
 | Layer | Type of data |
@@ -30,10 +32,36 @@ Brandwidth delay product will go on increasing if the latency RTT is higher.
 
 Open sysclt.conf and modify this values:
 
+```js
     tcp_window.scaling = 1
     net.core.rmem_max = 1677216 (1Gbi)
     net.core.wmem_max = 1677216 (1Gbi)
     net.ipv4.tcp_rmem = 4096    87580   1677216
     net.ipv4.tcp_wmem = 4096    8750    1677216
+```
 
-<code> sysctl -p /etc/sysctl.conf </code>
+```js
+sysctl -p /etc/sysctl.conf
+```
+
+
+## Network tunning performance
+
+Increase TCP window size: Modify the `net.core.wmem_max`, `net.core.rmem_max`, and `net.ipv4.tcp_wmem` kernel parameters to increase the maximum TCP window size.
+
+> What is the TCP window size?
+
+The TCP window size, also known as the receive window, is a parameter used in the TCP (Transmission Control Protocol) protocol to control the amount of data that can be sent by a sender before receiving an acknowledgment from the receiver. It represents the amount of buffer space available on the receiving side to hold incoming data.
+
+Enable TCP fast open: Set `net.ipv4.tcp_fastopen` to 3 to enable TCP fast open, which can reduce connection establishment latency.
+
+> What is TCP Fast Open?
+
+TCP Fast Open (TFO) is an extension to the TCP (Transmission Control Protocol) protocol that aims to reduce the latency of establishing a TCP connection. Traditionally, the TCP three-way handshake is used to establish a connection between a client and a server, which involves three packets being exchanged between the two endpoints. TFO allows data to be exchanged during the initial connection establishment, reducing the number of round trips required.
+
+It's important to note that both the client and the server need to support TCP Fast Open for it to work. The support can be enabled in the operating system or application configurations. Additionally, TFO is subject to certain security considerations and may not be suitable for all scenarios.
+
+Enable TCP congestion control algorithms: Experiment with different congestion control algorithms using `net.ipv4.tcp_congestion_control` parameter. Common options include Cubic, BBR, and Vegas.
+
+Increase TCP maximum backlog: Modify the `net.core.somxconn` parameter to increase the maximum number of pending connections.
+
