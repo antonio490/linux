@@ -47,6 +47,8 @@ sysctl -p /etc/sysctl.conf
 
 ## Network tunning performance
 
+### TCP settings:
+
 Increase TCP window size: Modify the `net.core.wmem_max`, `net.core.rmem_max`, and `net.ipv4.tcp_wmem` kernel parameters to increase the maximum TCP window size.
 
 > What is the TCP window size?
@@ -64,4 +66,30 @@ It's important to note that both the client and the server need to support TCP F
 Enable TCP congestion control algorithms: Experiment with different congestion control algorithms using `net.ipv4.tcp_congestion_control` parameter. Common options include Cubic, BBR, and Vegas.
 
 Increase TCP maximum backlog: Modify the `net.core.somxconn` parameter to increase the maximum number of pending connections.
+
+### Optimize network interface settings:
+
+Disable IPv6 if not in use: If your network infraestructure does not support IPv6, disable it by setting `net.ipv6.conf.all.disable_ipv6` and `net.ipv6.conf.default.disable_ipv6` to 1.
+
+Disable unnecessary network protocols and services: Identify and disable any unused protocols or services to reduce network overhead.
+
+Adjust the MTU size: If you are using Jumbo frames or have specific network requirements, consider adjusting the Maximum Transmission Unit size using the ip command. 
+
+```js
+ip link set mtu <value> dev <if_name>
+```
+
+### Enable kernel-level optimizations
+
+Increate the network buffers: Modify the net.core.netdev_max_backlog, net.core.optmem_max, and net.ipv4.udp_mem parameters to increase network buffer sizes.
+
+Enable receive packet steering (RPS): RPS distributes incoming network traffic accross multiple CPU cores, reducing the load on a single core. Modify the net.core.rps_sock_flow_entries parameter to enable RPS.
+
+Enable receive flows steering (RFS): RFS allows the kernel to distribute incoming network traffic to the appropiate process or socket. Modify the net.core.rps_sock_flow_entries parameter to enable RFS.
+
+### Optimize firewall and routing rules
+
+Review and optimize firewalls rules: Analyze your firewall rules and ensure they are efficient. Remove any unnecessary rules that might introduce network latency.
+
+Optimize routing tables: Evaluate your routing tables and remove any redundant or inefficient routesd.
 
