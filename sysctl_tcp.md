@@ -81,11 +81,11 @@ ip link set mtu <value> dev <if_name>
 
 ### Enable kernel-level optimizations
 
-Increate the network buffers: Modify the net.core.netdev_max_backlog, net.core.optmem_max, and net.ipv4.udp_mem parameters to increase network buffer sizes.
+Increase the network buffers: Modify the `net.core.netdev_max_backlog`, `net.core.optmem_max`, and `net.ipv4.udp_mem` parameters to increase network buffer sizes.
 
-Enable receive packet steering (RPS): RPS distributes incoming network traffic accross multiple CPU cores, reducing the load on a single core. Modify the net.core.rps_sock_flow_entries parameter to enable RPS.
+Enable receive packet steering (RPS): RPS distributes incoming network traffic accross multiple CPU cores, reducing the load on a single core. Modify the `net.core.rps_sock_flow_entries` parameter to enable RPS.
 
-Enable receive flows steering (RFS): RFS allows the kernel to distribute incoming network traffic to the appropiate process or socket. Modify the net.core.rps_sock_flow_entries parameter to enable RFS.
+Enable receive flows steering (RFS): RFS allows the kernel to distribute incoming network traffic to the appropiate process or socket. Modify the `net.core.rps_sock_flow_entries` parameter to enable RFS.
 
 ### Optimize firewall and routing rules
 
@@ -93,3 +93,6 @@ Review and optimize firewalls rules: Analyze your firewall rules and ensure they
 
 Optimize routing tables: Evaluate your routing tables and remove any redundant or inefficient routesd.
 
+### Monitor and continue fine tuning
+
+Use network tools to observe the performance of your system and identify bottlenecks or areas for improvement. Tools like `iftop`, `netstat`, `nethogs` or `iperf` can provice insights
