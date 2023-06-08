@@ -15,52 +15,47 @@
 
 On boot partition create a file wap_supplicant.conf to start wifi on startup and and another file ssh empy to enable and start ssh server.
 
-<code>
 
-    country=ES
-    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-    update_config=1
+```js
+country=ES
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
 
-    network={
-            ssid=<SSID>
-            scan_ssid=1
-            psk=<password>
-            key_mgmt=WPA-PSK
-            id_str="home"
-    }
-</code>
+network={
+          ssid=<SSID>
+          scan_ssid=1
+          psk=<password>
+          key_mgmt=WPA-PSK
+          id_str="home"
+}
+```
 
-Otherwise we can configure network interfaces like this after boot.
+Otherwise we can configure network interfaces like this after boot. `/etc/network/interfaces`
 
-> /etc/network/interfaces
+```js
+auto lo
+iface lo inet loopback
 
-<code>
-    auto lo
-    iface lo inet loopback
+auto eth0
+iface eth0 inet static
+     address 172.22.17.X
+     netmask 255.255.255.0
 
-    auto eth0
-    iface eth0 inet static
-        address 172.22.17.X
-        netmask 255.255.255.0
+auto wlan0
+iface wlan0 inet dhcp
+     wpa-ssid <NAME-SSID>
+     wpa-psk  <PASS-PSK>
 
-    auto wlan0
-    iface wlan0 inet dhcp
-        wpa-ssid <NAME-SSID>
-        wpa-psk  <PASS-PSK>
-
-
-</code>
+```
 
 
-<code>
-
-     # raspi-config
-
-</code>
+```js
+# raspi-config
+```
 
 1. Enable SSH server startup
-2. Enbale I2C and Camera interfaces
-3. Set localisation options
+2. Enable I2C and Camera interfaces
+3. Set localization options
 
 
 ## Services
@@ -69,59 +64,48 @@ Otherwise we can configure network interfaces like this after boot.
 
 Installation script:
 
-<code>
-
-     $ bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
-
-<code>
+```js
+$ bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+```
 
 To launch node red service locally execute this command:
 
-<code>
-
-     $ node-red-pi --max-old-space-size=256
-
-</code>
+```js
+$ node-red-pi --max-old-space-size=256
+```
 
 If you want Node-RED to run when the Pi is turned on, or re-booted, you can enable the service to autostart by running the command:
 
-<code>
-     
-     $ sudo systemctl enable nodered.service
-
-</code>
+```js
+# systemctl enable nodered.service
+```
 
 To disable the service, run the command:
 
-<code>
-
-     $ sudo systemctl disable nodered.service
-
-</code>
+```js
+# systemctl disable nodered.service
+```
 
 When browsing from another machine you should use the hostname or IP-address of the Pi: <kbd> http://<hostname>:1880 </kbd> You can find the IP address by running hostname -I on the Pi.
 
 ### MQTT
 
-<code>
+```js
+# apt-get update
+# apt-get install mosquitto
+# apt-get install mosquitto-clients
+```
 
-     $ sudo apt-get update
-     $ sudo apt-get install mosquitto
-     $ sudo apt-get install mosquitto-clients
+#### Demo
 
-</code>
+```js
+pi@raspberrypi:~ $ mosquitto_sub -d -h localhost -t "TEST"
+```
 
-> Demo
+```js
+antonio ~ $ mosquitto_pub -h 172.22.17.100 -t "TEST" -m "Mi primer mensaje usando MQTT"
 
-<code>
-     
-     pi@raspberrypi:~ $ mosquitto_sub -d -h localhost -t "TEST"
-</code>
-
-<code>
-
-     antonio ~ $ mosquitto_pub -h 172.22.17.100 -t "TEST" -m "Mi primer mensaje usando MQTT"
-</code>
 
 Client mosqsub|3788-raspberryp received PUBLISH (d0, q0, r0, m0, 'GPIO', ... (29 bytes))
 Mi primer mensaje usando MQTT
+```
