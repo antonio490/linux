@@ -27,11 +27,9 @@ ICMP is the protocol used by the ping command. To allow ICMP traffic, use:
 HTTP and HTTPS traffic uses TCP port 443 and 80. To allow it through the firewall, you would use:
 
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT    # Allow HTTP traffic
-    
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT   # Allow HTTPS traffic
 
     iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT    # Allow outgoing HTTP traffic
-    
     iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT   # Allow outgoing HTTPS traffic
 
 
@@ -42,6 +40,11 @@ To allow DNS traffic through your firewall using iptables, you need to open both
 
     iptables -A OUTPUT -p udp --dport 53 -j ACCEPT  # Allow outgoing DNS queries (UDP)
     iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT  # Allow outgoing DNS queries (TCP)
+
+
+Allow incoming traffic for established connections:
+
+    iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 Save rules to a file:
 
