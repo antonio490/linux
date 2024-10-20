@@ -79,3 +79,9 @@
     7    leap_micro   running
 
     $ antonio (~) >virt-viewer leap_micro
+
+    $ antonio (~) >sudo virsh list --all
+    Id   Name         State
+    -----------------------------
+    -    leap_micro   shut off
+
