@@ -142,3 +142,41 @@ store role:Primary
   peer role:Secondary
     replication:Established peer-disk:UpToDate
 ```
+
+```shell
+antonio@ha-node-2:~$ drbdadm status
+store role:Secondary
+  disk:UpToDate
+  peer role:Primary
+    replication:Established peer-disk:UpToDate
+```
+
+```shell
+ha-node-1:~$ sudo mkfs.ext4 /dev/drbd0
+mke2fs 1.47.1 (20-May-2024)
+/dev/drbd0 contains a ext4 file system
+	created on Fri Feb 21 21:18:35 2025
+Proceed anyway? (y,N) y
+Discarding device blocks: done                            
+Creating filesystem with 1048535 4k blocks and 262144 inodes
+Filesystem UUID: d4f5bf7c-c23f-4e94-9a93-a1e354ad0007
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information: done 
+
+ha-node-1:~$ sudo mount /dev/drbd0 /mnt/store/
+
+ha-node-1:~$ lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+vda                       253:0    0   20G  0 disk 
+├─vda1                    253:1    0    1M  0 part 
+├─vda2                    253:2    0  1.8G  0 part /boot
+└─vda3                    253:3    0 18.2G  0 part 
+  └─ubuntu--vg-ubuntu--lv 252:0    0   10G  0 lvm  /
+vdb                       253:16   0    4G  0 disk 
+└─drbd0                   147:0    0    4G  0 disk /mnt/store
+```
