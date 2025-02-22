@@ -45,7 +45,7 @@ virsh list --all
  -    node-2   shut off
 ```
 
-Corosync configuration
+### Corosync installation and configuration
 
 ```shell
 ha-node-1:~$ cat /etc/corosync/corosync.conf
@@ -87,4 +87,58 @@ Node List:
 
 Active Resources:
   * No active resources
+```
+
+### DRBD installation and configuration
+
+First we create a new virtual disk vdb and then we attach it to the correspondant vm:
+
+```shell
+qemu-img create -f qcow2 /var/lib/libvirt/images/node-1-vdb.qcow2 4G
+virsh attach-disk node-1 /var/lib/libvirt/images/node-1-vdb.qcow2 vdb --persistent --subdriver=qcow2
+
+qemu-img create -f qcow2 /var/lib/libvirt/images/node-2-vdb.qcow2 4G
+virsh attach-disk node-2 /var/lib/libvirt/images/node-2-vdb.qcow2 vdb --persistent --subdriver=qcow2
+```
+
+```shell
+ha-node-1:~$ lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+vda                       253:0    0   20G  0 disk 
+├─vda1                    253:1    0    1M  0 part 
+├─vda2                    253:2    0  1.8G  0 part /boot
+└─vda3                    253:3    0 18.2G  0 part 
+  └─ubuntu--vg-ubuntu--lv 252:0    0   10G  0 lvm  /
+vdb                       253:16   0    4G  0 disk 
+└─drbd0                   147:0    0    4G  1 disk 
+```
+
+
+```shell
+ha-node-1:~$ cat /etc/drbd.d/store.res 
+resource store {      
+   device /dev/drbd0;      
+   disk /dev/vdb;      
+   meta-disk internal;      
+   on ha-node-1 {          
+      address 192.168.122.220:7788;          
+   }      
+   on ha-node-2 {          
+      address 192.168.122.222:7788;          
+   }      
+}
+```
+
+```shell
+sudo drbdadm create-md store
+sudo drbdadm up store
+sudo drbdadm primary --force store
+```
+
+```shell
+ha-node-1:~$ drbdadm status
+store role:Primary
+  disk:UpToDate
+  peer role:Secondary
+    replication:Established peer-disk:UpToDate
 ```
