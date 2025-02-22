@@ -121,6 +121,45 @@ vdb                       253:16   0    4G  0 disk
 └─drbd0                   147:0    0    4G  1 disk 
 ```
 
+Load drbd kernel module:
+
+```shell
+ha-node-1:~$ sudo modprobe drbd
+
+ha-node-1:~$ lsmod | grep drbd
+drbd                  462848  4
+lru_cache              16384  1 drbd
+libcrc32c              12288  3 btrfs,drbd,raid456
+```
+
+Start and check status of drbd:
+```shell
+sudo systemctl enable drbd
+sudo systemctl start drbd
+
+ha-node-1:~$ sudo systemctl status drbd
+● drbd.service - DRBD -- please disable. Unless you are NOT using a cluster manager.
+     Loaded: loaded (/usr/lib/systemd/system/drbd.service; enabled; preset: enabled)
+     Active: active (exited) since Sat 2025-02-22 14:18:23 UTC; 5h 58min ago
+ Invocation: 66da37ebad6743f0b8a6f37eb6a30dfd
+    Process: 933 ExecStart=/lib/drbd/scripts/drbd start (code=exited, status=0/SUCCESS)
+   Main PID: 933 (code=exited, status=0/SUCCESS)
+   Mem peak: 3M
+        CPU: 51ms
+
+Feb 22 14:15:29 ha-node-1 drbd[933]: /lib/drbd/scripts/drbd: line 148: /var/lib/linstor/loop_device_mapping: No such file or directory
+Feb 22 14:15:29 ha-node-1 drbd[955]: [
+Feb 22 14:15:29 ha-node-1 drbd[955]:      create res: store
+Feb 22 14:15:29 ha-node-1 drbd[955]:    prepare disk: store
+Feb 22 14:15:29 ha-node-1 drbd[955]:     adjust disk: store
+Feb 22 14:15:29 ha-node-1 drbd[955]:      adjust net: store
+Feb 22 14:15:29 ha-node-1 drbd[955]: ]
+Feb 22 14:18:23 ha-node-1 drbd[985]: WARN: stdin/stdout is not a TTY; using /dev/console
+Feb 22 14:18:23 ha-node-1 drbd[933]:    ...done.
+Feb 22 14:18:23 ha-node-1 systemd[1]: Finished drbd.service - DRBD -- please disable. Unless you are NOT using a cluster manager..
+```
+
+
 
 ```shell
 ha-node-1:~$ cat /etc/drbd.d/store.res 
