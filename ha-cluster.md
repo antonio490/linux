@@ -24,7 +24,15 @@ virt-install \
 Start the VM and install packages pacemaker and corosync:
 ```shell
 sudo apt update
-sudo apt install pacemaker corosync
+sudo apt install pacemaker corosync coccinelle
+
+sudo apt install git build-essential dkms linux-headers-$(uname -r)
+```
+```shell
+git clone https://github.com/LINBIT/drbd.git
+cd drbd
+make
+sudo make install
 ```
 
 Clone the node-1 vm to have a second node name node-2, which has already has pacemaker and corosync installed.
