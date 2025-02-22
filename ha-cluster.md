@@ -35,7 +35,7 @@ virt-clone \
     --file /var/lib/libvirt/images/node-2.qcow2
 ```
 
-This is my result after creating both vm's:
+Result after creating both vm's:
 ```shell
 virsh list --all
 
@@ -43,4 +43,48 @@ virsh list --all
 -------------------------
  -    node-1   shut off
  -    node-2   shut off
+```
+
+Corosync configuration
+
+```shell
+ha-node-1:~$ cat /etc/corosync/corosync.conf
+totem {
+    version: 2
+    secauth: off
+    cluster_name: my_cluster
+    transport: udpu
+}
+
+nodelist {
+    node {
+        ring0_addr: 192.168.122.220
+        nodeid: 1
+    }
+    node {
+        ring0_addr: 192.168.122.222
+        nodeid: 2
+    }
+}
+quorum {
+    provider: corosync_votequorum
+}
+```
+
+```shell
+ha-node-1:~$ sudo crm_mon
+
+Cluster Summary:
+  * Stack: corosync (Pacemaker is running)
+  * Current DC: ha-node-2 (version 2.1.8-2.1.8) - partition with quorum
+  * Last updated: Sat Feb 22 14:18:57 2025 on ha-node-1
+  * Last change:  Fri Feb 21 21:20:51 2025 by hacluster via hacluster on ha-node-1
+  * 2 nodes configured
+  * 0 resource instances configured
+
+Node List:
+  * Online: [ ha-node-1 ha-node-2 ]
+
+Active Resources:
+  * No active resources
 ```
