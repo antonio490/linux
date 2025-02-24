@@ -159,8 +159,6 @@ Feb 22 14:18:23 ha-node-1 drbd[933]:    ...done.
 Feb 22 14:18:23 ha-node-1 systemd[1]: Finished drbd.service - DRBD -- please disable. Unless you are NOT using a cluster manager..
 ```
 
-
-
 ```shell
 ha-node-1:~$ cat /etc/drbd.d/store.res 
 resource store {      
