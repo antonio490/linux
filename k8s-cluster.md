@@ -150,8 +150,8 @@ master:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 master:~$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-
+```shell
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
-
 sudo kubeadm join 192.168.122.14:6443 --token <TOKEN> --discovery-token-ca-cert-hash sha256:<HASH>
+```
