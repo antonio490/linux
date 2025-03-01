@@ -94,5 +94,15 @@ Environment="JENKINS_WAR=/usr/share/java/jenkins.war"
 
 # Location of the exploded WAR
 #Environment="JENKINS_WEBROOT=%C/jenkins/war"
+```
 
+Start jenkins
+
+```shell
+
+sudo systemctl enable jenkins.service
+sudo systemctl start jenkins.service
+
+ss -tulpn | grep 8080
+tcp   LISTEN 0      50                 *:8080            *:* 
 ```
