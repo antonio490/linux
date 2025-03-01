@@ -19,4 +19,49 @@ virt-install \
 ```
 
 
+### Configure SSH keys
+
+```shell
+ssh-keygen -t rsa -b 4096 -C "server-vm" -f ~/.ssh/server_vm_key
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/antonio/.ssh/server_vm_key
+Your public key has been saved in /home/antonio/.ssh/server_vm_key.pub
+The key fingerprint is:
+SHA256:yJRJTltisX3Iwq6AB3XlQTqdSIkuWglRGnM7aV/+KL0 server-vm
+The key's randomart image is:
++---[RSA 4096]----+
+|+o+.o+X..        |
+|.*.=.@ % .       |
+|oo=.+ # + .      |
+|.++o B o .       |
+|ooo . = S        |
+|.. . o o         |
+|    o o .        |
+|     . .         |
+|      E          |
++----[SHA256]-----+
+```
+
+```shell
+ssh-copy-id -i ~/.ssh/server_vm_key.pub ans@192.168.122.87
+
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/antonio/.ssh/server_vm_key.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+ans@192.168.122.87's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'ans@192.168.122.87'"
+and check to make sure that only the key(s) you wanted were added.
+```
+
+On the server VM, ensure SSH is configured properly:
+```shell
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo systemctl restart ssh
+```
 
