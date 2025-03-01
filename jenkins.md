@@ -65,3 +65,34 @@ sudo sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/s
 sudo systemctl restart ssh
 ```
 
+Install java
+
+```shell
+sudo apt install -y openjdk-11-jdk
+```
+
+
+Download jenkins.war
+
+```shell
+wget https://get.jenkins.io/war-stable/2.332.3/jenkins.war
+```
+
+Configure jenkins systemd
+
+```shell
+sudo cp jenkins.war /usr/share/java/jenkins.war 
+sudo vi /lib/systemd/system/jenkins.service
+
+-----------------------------------------------------
+# Directory where Jenkins stores its configuration and workspaces
+Environment="JENKINS_HOME=/var/lib/jenkins"
+WorkingDirectory=/var/lib/jenkins
+
+# Location of the Jenkins WAR
+Environment="JENKINS_WAR=/usr/share/java/jenkins.war"
+
+# Location of the exploded WAR
+#Environment="JENKINS_WEBROOT=%C/jenkins/war"
+
+```
