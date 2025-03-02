@@ -106,3 +106,14 @@ sudo systemctl start jenkins.service
 ss -tulpn | grep 8080
 tcp   LISTEN 0      50                 *:8080            *:* 
 ```
+
+Troubleshoot
+
+Make sure java latest version is installed, otherwise there could be incompatibilities with jenkins:
+
+```shell
+java --version
+openjdk 21.0.6 2025-01-21
+OpenJDK Runtime Environment (build 21.0.6+7-Ubuntu-124.10.1)
+OpenJDK 64-Bit Server VM (build 21.0.6+7-Ubuntu-124.10.1, mixed mode, sharing)
+```
