@@ -12,3 +12,15 @@ Linux most common filesystems:
 - ext{2,3,4}
 - brtfs
 - xfs
+
+#### LVM
+
+```shell
+pvdisplay
+vgdisplay
+lgdisplay
+
+pvcreate
+vgcreate
+lgcreate
+```
