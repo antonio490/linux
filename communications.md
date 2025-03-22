@@ -47,16 +47,80 @@ This route covers all the addresses from 2001:db8:0:: to 2001:db8:3::, effective
 ### Self configuration
 With IPv6 NAT, DHCP and ARP is no longer really needed. It is all been replace with the Neighbor discovery protocol.
 
---------
+Self-configuration in IPv6 is one of its key features, enabling devices to automatically configure their own network settings without requiring a DHCP (Dynamic Host Configuration Protocol) server. This process allows for easier network setup, especially in environments where devices frequently join and leave the network.
 
----- Local
+There are two main methods for IPv6 address configuration:
 
-<- NS: Neighbour solicitation message
+1. Stateless Address Autoconfiguration (SLAAC)
 
--> NA: Neighbour advertisement message
+2. Stateful Address Configuration (DHCPv6)
 
----- Internet
 
-<- RS: Router solicitation message
+Self-configuration in IPv6, or SLAAC, allows a device to automatically generate an IPv6 address and configure its network settings using the information advertised by routers. Here’s how it works:
 
--> RA: Router advertisement message
+1. Router Advertisement (RA)
+
+    When a device connects to an IPv6 network, it listens for Router Advertisements (RAs), which are periodically sent by routers on the network. These RAs provide important information about the network, including:
+
+    - Prefix (network identifier).
+
+    - The presence of a DHCPv6 server (if required for stateful configuration).
+
+    - Whether the device should use SLAAC or DHCPv6 for address configuration.
+
+2. Address Generation
+
+    The device uses the prefix provided in the RA and combines it with its MAC address (or a randomly generated interface identifier) to create its IPv6 address.
+
+    - This is done using the Modified EUI-64 format (extended unique identifier).
+
+    - The result is an IPv6 address with a global scope, such as 2001:db8::1234:5678.
+
+3. Duplicate Address Detection (DAD)
+
+    Before the device can use its newly generated IPv6 address, it performs Duplicate Address Detection (DAD) to ensure that the address is not already in use on the network. If no duplicate is found, the address is considered valid and can be used for communication.
+
+4. Routing and Connectivity
+
+    The device can now communicate with other devices within the same network or even beyond, using the router as a gateway.
+
+    The device will periodically check for new Router Advertisements to update its configuration if needed.
+
+5. Optional DHCPv6 for Additional Settings
+
+    Although the device can configure its address and basic settings via SLAAC, it may still use DHCPv6 for additional information, like DNS servers or other configuration parameters. This is common in larger networks that require more control over IP address assignments.
+
+Advantages of Self-Configuration (SLAAC)
+
+- No Need for a DHCP Server
+SLAAC allows devices to automatically configure themselves without relying on a central DHCP server. This reduces the administrative burden and makes it easier to scale large networks.
+
+- Faster Setup
+Devices can automatically join the network and begin using IPv6 addresses without waiting for a DHCP server to assign an address.
+
+- Improved Mobility
+Because devices generate their own addresses based on their network environment, they can easily move between networks and reconfigure their addresses accordingly.
+
+- Reduced Network Overhead
+Since there's no need for a DHCP server in SLAAC, there is less communication overhead between devices and servers, making the process quicker and more efficient.
+
+----------------------------------
+
+Example of Self-Configuration Process (SLAAC)
+
+- Step 1: Router Sends RA
+A router on the network periodically sends an RA packet that contains the prefix 2001:db8::/64.
+
+- Step 2: Device Generates IPv6 Address
+A device connects to the network and generates an address based on the RA. If its MAC address is 00:11:22:33:44:55, it will generate an address like:
+
+    ```shell
+    2001:db8::211:22ff:fe33:4455
+    ```
+
+- Step 3: Duplicate Address Detection (DAD)
+The device checks if the address is already in use. If not, it proceeds with the address.
+
+- Step 4: Device Can Now Communicate
+The device is now configured with an IPv6 address and can communicate with other devices in the network, using the router as the default gateway.
+
