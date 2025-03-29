@@ -5,6 +5,29 @@
 
 Pacemaker and Corosync are open-source tools that allow you to create a high-availability cluster on your Ubuntu servers. In this tutorial, I will guide you through the process of setting up a high-availability cluster using Pacemaker and Corosync on two Ubuntu VM servers. 
 
+### Pacemaker
+
+Pacemaker is a high-availability cluster resource manager – software that runs on a set of hosts (a cluster of
+nodes) in order to preserve integrity and minimize downtime of desired services (resources).
+
+Pacemaker's key features include:
+- Detection of and recovery from node and service-level failures
+- Ability to ensure data integrity by fencing faulty nodes
+- Support (but no requirement) for shared storage
+- Support for practically any redundancy configuration (active/passive, N+1, etc.)
+- Automatically replicated configuration that can be updated from any node
+- Ability to specify cluster-wide relationships between services, such as ordering, colocation, and anti-
+colocation
+- Support for advanced service types, such as clones (services that need to be active on multiple nodes),
+promotable clones (clones that can run in one of two roles), and containerized services
+- Unified, scriptable cluster management tools
+
+### Corosync
+
+### Stonith
+
+
+
 ### Build & Installation
 
 ```shell
