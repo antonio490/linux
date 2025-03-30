@@ -34,11 +34,9 @@ available.
 - Cluster resource manager: Pacemaker provides the brain that processes and reacts to events that occur in the cluster. These events may include nodes joining or leaving the cluster; resource events caused by failures, maintenance, or scheduled activities; and other administrative actions. To achieve the desired availability, Pacemaker may start and stop resources and fence nodes.
 - Cluster tools: These provide an interface for users to interact with the cluster. Various command-line and graphical (GUI) interfaces are available.
 
-*The Cluster Information Base (CIB) is an XML representation of the cluster’s configuration and the state of all nodes and resources. The CIB manager (pacemaker-based) keeps the CIB synchronized across the cluster, and handles requests to modify it.*
+*The Cluster Information Base (CIB) is an XML representation of the cluster's configuration and the state of all nodes and resources. The CIB manager (pacemaker-based) keeps the CIB synchronized across the cluster, and handles requests to modify it.*
 
-### Corosync
-
-### Fencing
+#### Fencing
 
 Fencing protects your data from being corrupted, and your application from becoming unavailable, due to unintended concurrent access by rogue nodes.
 Just because a node is unresponsive doesn't mean it has stopped accessing your data. The only way to be 100% sure that your data is safe, is to use fencing to ensure that the node is truly offline before allowing the data to be accessed from another node.
@@ -54,6 +52,12 @@ Power fencing devices include:
 Fabric fencing devices include:
 - Shared storage that can be cut off for a target host by another host (for example, an external storage device that supports SCSI-3 persistent reservations)
 - Intelligent network switches
+
+#### DRBD
+
+Even if you're serving up static websites, having to manually synchronize the contents of that website to all the machines in the cluster is not ideal. For dynamic websites, such as a wiki, it's not even an option. Not everyone can afford network-attached storage, but somehow the data needs to be kept in sync.
+
+*Enter DRBD, which can be thought of as network-based RAID-1.*
 
 ### Build & Installation
 
