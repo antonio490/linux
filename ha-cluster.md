@@ -11,22 +11,49 @@ Pacemaker is a high-availability cluster resource manager – software that runs
 nodes) in order to preserve integrity and minimize downtime of desired services (resources).
 
 Pacemaker's key features include:
+
 - Detection of and recovery from node and service-level failures
 - Ability to ensure data integrity by fencing faulty nodes
 - Support (but no requirement) for shared storage
 - Support for practically any redundancy configuration (active/passive, N+1, etc.)
 - Automatically replicated configuration that can be updated from any node
-- Ability to specify cluster-wide relationships between services, such as ordering, colocation, and anti-
-colocation
-- Support for advanced service types, such as clones (services that need to be active on multiple nodes),
-promotable clones (clones that can run in one of two roles), and containerized services
+- Ability to specify cluster-wide relationships between services, such as ordering, colocation, and anti-colocation
+- Support for advanced service types, such as clones (services that need to be active on multiple nodes), promotable clones (clones that can run in one of two roles), and containerized services
 - Unified, scriptable cluster management tools
+
+#### Cluster Architecture
+
+At a high level, a cluster can be viewed as having these parts (which together are often referred to as the
+cluster stack):
+
+- Resources: These are the reason for the cluster's being, the services that need to be kept highly
+available.
+- Resource agents: These are scripts or operating system components that start, stop, and monitor resources, given a set of resource parameters. These provide a uniform interface between Pacemaker and the managed services.
+- Fence agents: These are scripts that execute node fencing actions, given a target and fence device parameters.
+- Cluster membership layer: This component provides reliable messaging, membership, and quorum information about the cluster. Currently, Pacemaker supports Corosync as this layer.
+- Cluster resource manager: Pacemaker provides the brain that processes and reacts to events that occur in the cluster. These events may include nodes joining or leaving the cluster; resource events caused by failures, maintenance, or scheduled activities; and other administrative actions. To achieve the desired availability, Pacemaker may start and stop resources and fence nodes.
+- Cluster tools: These provide an interface for users to interact with the cluster. Various command-line and graphical (GUI) interfaces are available.
+
+*The Cluster Information Base (CIB) is an XML representation of the cluster’s configuration and the state of all nodes and resources. The CIB manager (pacemaker-based) keeps the CIB synchronized across the cluster, and handles requests to modify it.*
 
 ### Corosync
 
-### Stonith
+### Fencing
 
+Fencing protects your data from being corrupted, and your application from becoming unavailable, due to unintended concurrent access by rogue nodes.
+Just because a node is unresponsive doesn't mean it has stopped accessing your data. The only way to be 100% sure that your data is safe, is to use fencing to ensure that the node is truly offline before allowing the data to be accessed from another node.
 
+Fencing also has a role to play in the event that a clustered service cannot be stopped. In this case, the cluster uses fencing to force the whole node offline, thereby making it safe to start the service elsewhere. Fencing is also known as STONITH, an acronym for “Shoot The Other Node In The Head”, since the most popular form of fencing is cutting a host's power.
+
+The two broad categories of fence device are power fencing, which cuts off power to the target, and fabric fencing, which cuts off the target’s access to some critical resource, such as a shared disk or access to the local network.
+Power fencing devices include:
+- Intelligent power switches
+- IPMI
+- Hardware watchdog device (alone, or in combination with shared storage used as a "poison pill" mechanism)
+
+Fabric fencing devices include:
+- Shared storage that can be cut off for a target host by another host (for example, an external storage device that supports SCSI-3 persistent reservations)
+- Intelligent network switches
 
 ### Build & Installation
 
