@@ -1,6 +1,37 @@
 
 # Kernel compilation from source code
 
+#### Remove old kernel files
+
+Check which kernel is currently running:
+
+```shell
+$ antonio >uname -r
+6.8.0-57-generic
+```
+
+List kernel packages installed (Debian):
+```shell
+$ antonio >dpkg --list | grep linux-image
+
+rc  linux-image-5.11.0-25-generic   5.11.0-25.27~20.04.1    amd64    Signed kernel image generic
+rc  linux-image-5.11.0-27-generic   5.11.0-27.29~20.04.1    amd64    Signed kernel image generic
+rc  linux-image-5.11.0-34-generic   5.11.0-34.36~20.04.1    amd64    Signed kernel image generic
+rc  linux-image-5.11.0-36-generic   5.11.0-36.40~20.04.1    amd64    Signed kernel image generic
+```
+
+Update the GRUB bootloader:
+```shell
+$ antonio >sudo update-grub
+```
+
+Autoremove orphaned packages:
+```shell
+$ antonio >sudo apt autoremove --purge
+```
+----------------
+
+#### Compile new kernel
 
 1. Download the kernel
 
