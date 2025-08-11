@@ -124,3 +124,26 @@ The device checks if the address is already in use. If not, it proceeds with the
 - Step 4: Device Can Now Communicate
 The device is now configured with an IPv6 address and can communicate with other devices in the network, using the router as the default gateway.
 
+## Network Types
+
+- LAN (Local area network -- Switch)
+
+- WAN (Wide area network --Router)
+
+- CAN (Campus area network)
+
+- MAN (Metropolitan area network)
+
+- Intranet (private internet)
+
+- WLAN (Wireless local area network)
+
+- PAN (Personal area network -- Bluetooth)
+
+## VoIP
+
+
+## VPNs
+
+
+

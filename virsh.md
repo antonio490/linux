@@ -47,6 +47,16 @@
         --network network=default,model=virtio
 
 
+    virt-install \
+        --name=leap_micro \
+        --osinfo=ubuntu24.04 \
+        --vcpus=6 \
+        --memory=8192 \
+        --disk size=60 \
+        --cdrom=/home/antonio/VIRT/ubuntu-24.04.1-live-server-amd64.iso \
+        --network network=default,model=virtio
+
+
     $ antonio (~) >virsh list
     Id   Name         State
     ----------------------------
@@ -84,4 +94,6 @@
     Id   Name         State
     -----------------------------
     -    leap_micro   shut off
+
+
 
