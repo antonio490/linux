@@ -1,0 +1,40 @@
+# CAN Serial
+ 
+### Installation
+
+```shell
+$ antonio (linux) >pipx install python-can
+installed package python-can 4.6.0, installed using Python 3.12.3
+These apps are now globally available
+    - can_bridge
+    - can_logconvert
+    - can_logger
+    - can_player
+    - can_viewer
+done! ✨ 🌟 ✨
+```
+
+### CAN interface
+
+Linux provides CAN driver for physical available CAN controller and for virtual created CAN adapter so called vcan.
+
+```shell
+$ antonio (linux) >sudo modprobe vcan
+$ antonio (linux) >lsmod | grep vcan
+vcan                   12288  0
+can_dev                53248  1 vcan
+```
+
+Configure an interface vcan0 type vcan with mtu 16
+
+```shell
+root@xps-ubuntu:~# ip link add dev vcan0 type vcan
+root@xps-ubuntu:~# ip link set vcan0 mtu 16
+root@xps-ubuntu:~# ip link set up vcan0
+root@xps-ubuntu:~# ip link sh
+...
+7: vcan0: <NOARP,UP,LOWER_UP> mtu 16 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/can 
+root@xps-ubuntu:~# 
+```
+
