@@ -73,4 +73,53 @@ Example: www.example.com → 93.184.216.34.
 
 These are usually A (IPv4) or AAAA (IPv6) records.
 
+#### How a Lookup Travels the Hierarchy
+
+Say your computer wants to resolve www.wikipedia.org:
+
+Ask the Root Servers: “Where are .org servers?”
+→ Root replies with list of .org TLD servers.
+
+Ask the .com TLD Servers: “Where is wikipedia.org authoritative server?”
+→ They reply with the NS (nameservers) for wikipedia.org.
+
+Ask the example.com Nameserver: “What’s the IP for www.wikipedia.org?”
+→ It replies with the A/AAAA record.
+
+Answer returned to you (and cached by resolvers for faster future queries).
+
+```
+Key insight: The hierarchy is all about delegation.
+Each level doesn’t know everything, it just knows who’s responsible next.
+```
+
+### Example with dig command
+
+```bash
+$ dig www.wikipedia.org
+
+    ; <<>> DiG 9.18.39-0ubuntu0.24.04.1-Ubuntu <<>> www.wikipedia.org
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 57693
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 65494
+    ;; QUESTION SECTION:
+    ;www.wikipedia.org.		IN	A
+
+    ;; ANSWER SECTION:
+    www.wikipedia.org.	33913	IN	CNAME	dyna.wikimedia.org.
+    dyna.wikimedia.org.	178	IN	A	185.15.59.224
+
+    ;; Query time: 13 msec
+    ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+    ;; WHEN: Fri Sep 12 20:11:33 CEST 2025
+    ;; MSG SIZE  rcvd: 91
+
+```
+
+
+
 ## Record types
