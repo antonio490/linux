@@ -161,3 +161,47 @@ Example:
 example.com.   3600   IN   MX   10 mail1.example.com.
 example.com.   3600   IN   MX   20 mail2.example.com.
 ```
+
+#### PTR (Pointer)
+
+Used for reverse DNS lookup (IP → domain).
+
+Example:
+```bash
+IP 93.184.216.34 might resolve to example.com.
+```
+Important for email servers (anti-spam checks).
+
+
+#### DNS LOC Record
+
+The LOC (Location) record is used to specify geographical location information for a domain name, including latitude, longitude, altitude, size, and precision.
+- It was defined in RFC 1876
+
+| Record    | Purpose                          |
+| --------- | -------------------------------- |
+| **A**     | Domain → IPv4                    |
+| **AAAA**  | Domain → IPv6                    |
+| **CNAME** | Alias to another domain          |
+| **MX**    | Mail server for a domain         |
+| **TXT**   | Text (SPF, DKIM, verification)   |
+| **PTR**   | Reverse lookup (IP → domain)     |
+| **NS**    | Authoritative nameservers        |
+| **SOA**   | Zone information (admin, timers) |
+| **SRV**   | Service discovery (host + port)  |
+| **CAA**   | Control SSL cert issuance        |
+| **NAPTR** | Advanced service discovery       |
+| **LOC**   | Location record                  |
+
+
+## DNS Protocol Basics
+
+#### Transport:
+
+- Uses UDP (port 53) for most queries (faster, less overhead).
+- Uses TCP (port 53) for:
+  - Responses larger than 512 bytes (without EDNS0).
+  - Zone transfers between nameservers (AXFR/IXFR).
+  - DNSSEC (because signatures can be large).
+  - Newer extensions like DoT (DNS over TLS) and DoH (DNS over HTTPS) run over 853/443.
+- Message format: DNS messages are structured the same for queries and responses.
