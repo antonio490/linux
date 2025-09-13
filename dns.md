@@ -123,3 +123,41 @@ $ dig www.wikipedia.org
 
 
 ## Record types
+
+#### A (Address Record)
+Maps a domain name → IPv4 address.
+Most common record type.
+
+```bash
+Example: example.com.   3600   IN   A   93.184.216.34
+```
+→ example.com points to IPv4 93.184.216.34.
+
+#### AAAA (Quad-A Record)
+Same as A, but for IPv6.
+
+```bash
+Example: example.com.   3600   IN   AAAA   2606:2800:220:1:248:1893:25c8:1946
+```
+
+#### CNAME (Canonical Name)
+Makes one domain an alias of another.
+Always points to another hostname, not an IP.
+
+```bash
+Example: www.example.com.   3600   IN   CNAME   example.com.
+```
+→ www.example.com resolves to the same IP as example.com.
+
+- Rules: A domain with a CNAME can’t have other records (like MX, A) at the same level. CNAME chains add lookup overhead.
+
+
+#### MX (Mail Exchange)
+Tells mail servers where to deliver email.
+Has priority (lower number = higher priority).
+
+Example: 
+```bash
+example.com.   3600   IN   MX   10 mail1.example.com.
+example.com.   3600   IN   MX   20 mail2.example.com.
+```
