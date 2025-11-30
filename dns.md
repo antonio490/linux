@@ -205,3 +205,32 @@ The LOC (Location) record is used to specify geographical location information f
   - DNSSEC (because signatures can be large).
   - Newer extensions like DoT (DNS over TLS) and DoH (DNS over HTTPS) run over 853/443.
 - Message format: DNS messages are structured the same for queries and responses.
+
+
+## Installation of BIND in linux
+
+
+First of all I have created a VM using qemu-img.
+
+# create bridge virbr0 in the Host
+```bash
+sudo ip link add name virbr0 type bridge
+sudo ip link set virbr0 up
+
+# create tap and attach to bridge
+sudo ip tuntap add tap0 mode tap
+sudo ip link set tap0 master virbr0
+sudo ip link set tap0 up
+
+```
+
+# run VM
+```bash
+qemu-system-x86_64 \
+  -enable-kvm \
+  -m 4G \
+  -hda dns.qcow2 \
+  -netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no \
+  -device virtio-net-pci,netdev=mynet0
+
+```
