@@ -270,3 +270,9 @@ when modifying a zone is important not to restart the service but instead refres
   $ nsd-checkzone lab.ans.es /etc/nsd/lab.ans.es.dns
 
   $ nsd-control reconfig
+
+Let's check now if a dns lookup works:
+
+  $ dig @10.0.222.103 dns2.lab.ans.es
+
+NSD doesn't provide reversive lookup, for that we need to configure a different service name BOUND. 
