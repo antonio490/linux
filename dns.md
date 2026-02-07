@@ -234,3 +234,39 @@ qemu-system-x86_64 \
   -device virtio-net-pci,netdev=mynet0
 
 ```
+
+
+### Configuring zones in NSD
+
+Example of a configure zone for NSD:
+
+  $ORIGIN lab.ans.es.
+  $TTL 86400
+  
+  @    IN     SOA    dns1.lab.ans.es.     admin.lab.ans.es    (
+       1;     Serial
+       86400; Refresh
+       7200;  Retry
+       57600; Expire
+       3600);  Negative TTL
+
+  @    IN     NS    dns1.lab.ans.es.     
+  @    IN     NS    dns2.lab.ans.es.
+  
+  dns1.lab.ans.es    IN    A    10.0.222.103
+  dns2.lab.ans.es    IN    A    10.0.222.104   
+
+
+Add this into the configuration file /etc/nsd/nsd.conf to recognize your zone created:
+
+  zone:
+      name: "lab.ans.es"
+      zonefile: "lab.ans.es.dns"
+
+when modifying a zone is important not to restart the service but instead refresh the individual zone, so there is not service interruption.First lets check configuration and zone is correct with these two cli tools:
+
+  $ nsd-checkconf /etc/nsd/nsd.conf
+
+  $ nsd-checkzone lab.ans.es /etc/nsd/lab.ans.es.dns
+
+  $ nsd-control reconfig
