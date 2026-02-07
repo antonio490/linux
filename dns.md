@@ -277,4 +277,4 @@ Let's check now if a dns lookup works:
 
   $ dig @10.0.222.103 dns2.lab.ans.es
 
-NSD doesn't provide reversive lookup, for that we need to configure a different service name BOUND. Together they form one of the best dns solutions.
+NSD doesn't provide reversive lookup, for that we need to configure a different service name UNBOUND. Together they form one of the best dns solutions.
