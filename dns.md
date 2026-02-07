@@ -238,6 +238,8 @@ qemu-system-x86_64 \
 
 ### Configuring zones in NSD
 
+Remember: NSD is an authoritative name server, meaning it does not perform recursive caching, and is used to enhance the resilience of DNS implementations.
+
 Example of a configure zone for NSD:
 
   $ORIGIN lab.ans.es.
@@ -275,4 +277,4 @@ Let's check now if a dns lookup works:
 
   $ dig @10.0.222.103 dns2.lab.ans.es
 
-NSD doesn't provide reversive lookup, for that we need to configure a different service name BOUND. 
+NSD doesn't provide reversive lookup, for that we need to configure a different service name BOUND. Together they form one of the best dns solutions.
