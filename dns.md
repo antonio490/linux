@@ -253,10 +253,8 @@ Example of a configure zone for NSD:
        3600);  Negative TTL
 
   @    IN     NS    dns1.lab.ans.es.     
-  @    IN     NS    dns2.lab.ans.es.
   
-  dns1.lab.ans.es    IN    A    10.0.222.103
-  dns2.lab.ans.es    IN    A    10.0.222.104   
+  dns1.lab.ans.es    IN    A    192.168.178.80
 
 
 Add this into the configuration file /etc/nsd/nsd.conf to recognize your zone created:
@@ -275,6 +273,92 @@ when modifying a zone is important not to restart the service but instead refres
 
 Let's check now if a dns lookup works:
 
-  $ dig @10.0.222.103 dns2.lab.ans.es
+  $ dig @192.168.178.80 dns1.lab.ans.es
 
 NSD doesn't provide reversive lookup, for that we need to configure a different service name UNBOUND. Together they form one of the best dns solutions.
+
+### Install and configure Unbound in the same host
+
+  $ sudo apt install unbound
+  
+configure /etc/unbound/unbound.conf
+
+```bash
+
+  # Unbound configuration file for Debian.
+  #
+  # See the unbound.conf(5) man page.
+  #
+  # See /usr/share/doc/unbound/examples/unbound.conf for a commented
+  # reference config file.
+  #
+  # The following line includes additional configuration files from the
+  # /etc/unbound/unbound.conf.d directory.
+  include-toplevel: "/etc/unbound/unbound.conf.d/*.conf"
+
+  server:
+      interface: 127.0.0.1
+      port: 53
+
+      access-control: 127.0.0.0/8 allow
+      access-control: ::1 allow
+
+      do-ip4: yes
+      do-ip6: no
+
+      hide-identity: yes
+      hide-version: yes
+
+      qname-minimisation: yes
+      prefetch: yes
+
+      root-hints: "/var/lib/unbound/root.hints"
+
+  ```
+
+Check that /var/lib/unbound/root.hints exists otherwise unbound would not be able to resolve addresses. Download it from internic.
+
+```bash
+
+  curl -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.root
+  chown unbound:unbound /var/lib/unbound/root.hints
+  chmod 644 /var/lib/unbound/root.hints
+
+  ```
+
+And now restart and check the status of nsd and unbound.
+
+
+  ```bash
+
+  ans@DebianDNS:~$ dig @192.168.178.80 dns1.lab.ans.es 
+
+  ; <<>> DiG 9.20.18-1~deb13u1-Debian <<>> @192.168.178.80 dns1.lab.ans.es
+  ; (1 server found)
+  ;; global options: +cmd
+  ;; Got answer:
+  ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 50031
+  ;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 1
+  ;; WARNING: recursion requested but not available
+
+  ;; OPT PSEUDOSECTION:
+  ; EDNS: version: 0, flags:; udp: 1232
+  ;; QUESTION SECTION:
+  ;dns1.lab.ans.es.		IN	A
+
+  ;; ANSWER SECTION:
+  dns1.lab.ans.es.	86400	IN	A	192.168.178.80
+
+  ;; AUTHORITY SECTION:
+  lab.ans.es.		86400	IN	NS	dns1.lab.ans.es.
+  lab.ans.es.		86400	IN	NS	dns2.lab.ans.es.
+
+  ;; Query time: 0 msec
+  ;; SERVER: 192.168.178.80#53(192.168.178.80) (UDP)
+  ;; WHEN: Sun Feb 08 17:59:16 CET 2026
+  ;; MSG SIZE  rcvd: 93
+
+  ans@DebianDNS:~$ dig @192.168.178.80 dns1.lab.ans.es +short
+  192.168.178.80
+
+  ```
