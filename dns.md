@@ -362,3 +362,24 @@ And now restart and check the status of nsd and unbound.
   192.168.178.80
 
   ```
+
+  ```bash
+
+  ans@DebianDNS:~$ dig @127.0.0.1 www.google.com +short
+142.251.157.119
+142.251.151.119
+142.251.154.119
+142.251.150.119
+142.251.152.119
+142.251.155.119
+142.251.156.119
+142.251.153.119
+
+ans@DebianDNS:~$ dig @127.0.0.1 www.nytimes.com +short
+www.prd.map.nytimes.com.
+www.prd.map.nytimes.xovr.nyt.net.
+nytimes.map.fastly.net.
+199.232.189.164
+
+```
+
