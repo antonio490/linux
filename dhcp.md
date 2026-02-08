@@ -29,3 +29,23 @@ INTERFACESv4="enp0s3"
 ```
 
 
+
+```bash
+$ nano /etc/dhcp/dhcpd.conf
+
+authoritative;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+subnet 192.168.50.0 netmask 255.255.255.0 {
+    range 192.168.50.100 192.168.50.150;
+    option routers 192.168.50.1;
+    option subnet-mask 255.255.255.0;
+    option domain-name-servers 8.8.8.8, 1.1.1.1;
+    option domain-name "lab.local";
+}
+```
+
+
+
