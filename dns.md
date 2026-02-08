@@ -319,11 +319,13 @@ configure /etc/unbound/unbound.conf
 Check that /var/lib/unbound/root.hints exists otherwise unbound would not be able to resolve addresses. Download it from internic.
 
 ```bash
+$ unbound-checkconf
+```
 
+```bash
   curl -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.root
   chown unbound:unbound /var/lib/unbound/root.hints
   chmod 644 /var/lib/unbound/root.hints
-
   ```
 
 And now restart and check the status of nsd and unbound.
@@ -364,22 +366,20 @@ And now restart and check the status of nsd and unbound.
   ```
 
   ```bash
-
   ans@DebianDNS:~$ dig @127.0.0.1 www.google.com +short
-142.251.157.119
-142.251.151.119
-142.251.154.119
-142.251.150.119
-142.251.152.119
-142.251.155.119
-142.251.156.119
-142.251.153.119
+  142.251.157.119
+  142.251.151.119
+  142.251.154.119
+  142.251.150.119
+  142.251.152.119
+  142.251.155.119
+  142.251.156.119
+  142.251.153.119
 
-ans@DebianDNS:~$ dig @127.0.0.1 www.nytimes.com +short
-www.prd.map.nytimes.com.
-www.prd.map.nytimes.xovr.nyt.net.
-nytimes.map.fastly.net.
-199.232.189.164
-
+  ans@DebianDNS:~$ dig @127.0.0.1 www.nytimes.com +short
+  www.prd.map.nytimes.com.
+  www.prd.map.nytimes.xovr.nyt.net.
+  nytimes.map.fastly.net.
+  199.232.189.164
 ```
 
