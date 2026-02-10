@@ -383,3 +383,21 @@ And now restart and check the status of nsd and unbound.
   199.232.189.164
 ```
 
+### Enable http2 or DoH (DNS over https) in unbound
+
+First we need to install the following packages to compile it:
+
+    ```bash
+    $ git clone https://github.com/NLnetLabs/unbound.git
+    $ cd unbound && git switch release-1.24.2
+    ```
+
+    ```bash
+    $ apt install flex bison libssl-dev libexpat1-dev libnghttp2-dev
+    ```
+
+    ```bash
+    $ ./configure --with-libnghttp2
+    $ make
+    $ make install
+    ´´´
