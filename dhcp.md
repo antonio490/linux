@@ -28,8 +28,6 @@ $ nano /etc/default/isc-dhcp-server
 INTERFACESv4="enp0s3"
 ```
 
-
-
 ```bash
 $ nano /etc/dhcp/dhcpd.conf
 
@@ -46,6 +44,4 @@ subnet 192.168.50.0 netmask 255.255.255.0 {
     option domain-name "lab.local";
 }
 ```
-
-
 
