@@ -294,7 +294,16 @@ root@xps-ubuntu:~# systemctl enable ssh
 
 root@xps-ubuntu:~# systemctl is-enabled ssh
 enabled
+```
 
+## Lab 8
+
+Bind mounts: exposing ~/shared inside container as /mnt/shared
+
+```shell
+systemd-nspawn \
+-D ~/systemd-labs/containers/lab \
+--bind=$HOME/shared:/mnt/shared
 ```
 
 # UKI
