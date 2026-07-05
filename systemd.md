@@ -90,6 +90,81 @@ sudo systemctl enable lab.service
 sudo systemctl start lab.service
 ```
 
+## Lab 3
+
+Create three services:
+
+- database.service
+- backend.service
+- frontend.service
+
+Each service should simply:
+    echo Started <name> into /tmp/startup.log
+
+
+/etc/systemd/system/database.service
+```ini
+[Unit]
+Description=Dependency Lab Database
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c 'echo "$(date): Started database" >> /tmp/startup.log'
+
+[Install]
+WantedBy=multi-user.target
+```
+
+/etc/systemd/system/backend.service
+```ini
+[Unit]
+Description=Dependency Lab Backend
+Requires=database.service
+After=database.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c 'echo "$(date): Started backend" >> /tmp/startup.log'
+```
+
+/etc/systemd/system/frontend.service
+```ini
+[Unit]
+Description=Dependency Lab Frontend
+Requires=backend.service
+After=backend.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c 'echo "$(date): Started frontend" >> /tmp/startup.log'
+```
+
+## Lab 4 
+
+Instead of cron, create a timer that writes current time every minute.
+
+/etc/systemd/system/lab-timer.service
+```ini
+[Unit]
+Description=Timer service
+
+[Service]
+ExecStart=/usr/bin/bash -c 'echo "Current time: $(date +"%T") >> /tmp/timer.log"'
+```
+
+/etc/systemd/system/lab-timer.timer
+```ini
+[Unit]
+Description=Run every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+Unit=lab-timer.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
 
 # UKI
 
