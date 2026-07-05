@@ -1,4 +1,4 @@
-# systemd
+# Module 1 systemd
 
 ## Lab 1
 
@@ -165,6 +165,73 @@ Persistent=true
 [Install]
 WantedBy=timers.target
 ```
+
+Check all timers enabled in the system:
+```shell
+    $ systemctl list-timers
+```
+
+## Lab 5
+
+Practice journalctl (persistent logs)
+
+By default, Ubuntu often stores logs only in memory unless /var/log/journal exists.
+
+```shell
+ls -ld /var/log/journal
+```
+
+if exists, logs are persistent.
+
+if not, create it:
+```shell
+sudo mkdir -p /var/log/journal
+sudo systemd-tmpfiles --create --prefix /var/log/journal
+sudo systemctl restart systemd-journald
+```
+
+Verify:
+
+```shell
+journalctl --disk-usage
+```
+
+1. logs since boot
+
+```shell
+journalctl -b
+```
+
+2. logs of one service
+
+```shell
+journalctl -u <service name>
+```
+
+3. previous boot
+
+```shell
+journalctl --list-boots
+
+journalctl -b 1
+```
+
+4. last five minutes
+
+```shell
+journalctl --sice "5 minutes ago"
+```
+
+5. Show error logs:
+```shell
+journalctl -p err
+
+journalctl -p warning
+
+journalctl -p crit
+```
+
+# Module 2 systemd-nspawn
 
 # UKI
 
