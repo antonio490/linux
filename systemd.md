@@ -252,6 +252,51 @@ lab     container systemd-nspawn ubuntu 24.04   -
 1 machines listed.
 ```
 
+It requires a password to login, so instead we are going to start the container this way:
+
+```shell
+sudo systemd-nspawn \
+    -M lab \
+    -D ~/systemd-labs/containers/lab \
+    -b
+```
+
+and now enter the container directly:
+
+```shell
+sudo machinectl shell root@lab
+```
+
+Inside the container
+
+1. install htop
+
+```shell
+root@xps-ubuntu:~# apt update && install htop
+
+root@xps-ubuntu:~# dpkg -l htop
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+||/ Name           Version       Architecture Description
++++-==============-=============-============-=================================
+ii  htop           3.3.0-4build1 amd64        interactive processes viewer
+
+```
+2. create user
+```shell
+root@xps-ubuntu:~# adduser dummy
+```
+3. enable ssh
+```shell
+root@xps-ubuntu:~# apt install openssh-server
+root@xps-ubuntu:~# systemctl enable ssh
+
+root@xps-ubuntu:~# systemctl is-enabled ssh
+enabled
+
+```
+
 # UKI
 
 Pakcages needed:
