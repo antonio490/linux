@@ -306,6 +306,40 @@ systemd-nspawn \
 --bind=$HOME/shared:/mnt/shared
 ```
 
+## Lab 9
+
+Lab 9 introduces one of the biggest differences between containers and VMs: networking is provided by the host. In systemd-nspawn, there are several networking modes, and --network-veth is the most commonly used for giving the container its own virtual Ethernet interface.
+
+```shell
+sudo systemd-nspawn \
+    -M lab \
+    -D ~/systemd-labs/containers/lab \
+    -b \
+    --network-veth
+```
+This creates a veth pair:
+
+```shell
+Host                     Container
+
+ve-lab  <-------------> host0
+```
+
+- ve-lab exists on the host.
+- host0 exists inside the container.
+
+They behave like a virtual Ethernet cable.
+
+Check on the container:
+```shell
+ip link
+ip addr show host0
+```
+
+If there is no IPv4 address, that's expected on many Ubuntu systems. --network-veth only creates the virtual link; it does not automatically provide DHCP or NAT. You need additional host-side networking (for example, systemd-networkd, a bridge, or manual configuration) for the container to obtain an address.
+
+
+
 # UKI
 
 Pakcages needed:
