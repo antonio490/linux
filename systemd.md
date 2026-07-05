@@ -233,6 +233,25 @@ journalctl -p crit
 
 # Module 2 systemd-nspawn
 
+## LAb 6
+
+Build an Ubuntu noble container:
+
+```shell
+sudo debootstrap noble ~/systemd-labs/containers/lab http://archive.ubuntu.com/ubuntu
+```
+```shell
+sudo systemd-nspawn -D ~/systemd-labs/containers/lab -b
+```
+
+```shell
+$ antonio (linux) >machinectl 
+MACHINE CLASS     SERVICE        OS     VERSION ADDRESSES
+lab     container systemd-nspawn ubuntu 24.04   -        
+
+1 machines listed.
+```
+
 # UKI
 
 Pakcages needed:
